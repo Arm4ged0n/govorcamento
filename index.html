@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparência Política Brasil - Engenharia Reversa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Adicionando Apache ECharts para a Planta Radial -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .benefit-color { color: #059669; } 
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .radial-container { background: radial-gradient(circle at center, #1f2937 0%, #111827 100%); }
+    </style>
+</head>
+<body class="text-gray-800 antialiased h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white flex flex-col hidden md:flex z-20">
+        <div class="p-6 flex items-center gap-3">
+            <i class="fa-solid fa-scale-balanced text-2xl text-yellow-400"></i>
+            <h1 class="text-xl font-bold tracking-tight">Transparência<br><span class="text-sm font-normal text-gray-400">Política BR</span></h1>
+        </div>
+        <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto pb-4">
+            <div class="text-xs uppercase font-bold text-gray-500 mb-2 mt-4 px-2">Visualização</div>
+            <a href="#" class="flex items-center gap-3 bg-gray-800 text-white px-4 py-3 rounded-lg transition"><i class="fa-solid fa-chart-line"></i> Dashboard Geral</a>
+            <a href="#radial-section" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-bullseye"></i> Engenharia Reversa</a>
+            
+            <div class="text-xs uppercase font-bold text-gray-500 mb-2 mt-6 px-2">Os 3 Poderes</div>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-flag"></i> Executivo</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-landmark"></i> Legislativo</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-gavel"></i> Judiciário</a>
+        </nav>
+        <div class="p-4 text-xs text-gray-500 border-t border-gray-800">
+            Dados estruturais baseados na LOA (Lei Orçamentária) e Transparência.
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-y-auto w-full scroll-smooth">
+        
+        <!-- Header -->
+        <header class="glass-panel sticky top-0 z-10 border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-4 w-full max-w-2xl">
+                <button class="md:hidden text-gray-600 hover:text-gray-900"><i class="fa-solid fa-bars text-xl"></i></button>
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar político, cargo ou familiar..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm">
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-4">
+                <span class="text-sm font-medium text-gray-600"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Banco Ativo</span>
+                <div class="h-8 w-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-md border-2 border-white">BR</div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="p-4 md:p-6 space-y-6">
+
+            <!-- NOVA SEÇÃO: ENGENHARIA REVERSA (PLANTA RADIAL) -->
+            <section id="radial-section" class="radial-container rounded-2xl shadow-xl border border-gray-800 p-6 overflow-hidden relative">
+                <!-- Efeitos de Fundo -->
+                <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                    <i class="fa-solid fa-fingerprint text-9xl text-white"></i>
+                </div>
+                
+                <div class="flex justify-between items-start mb-2 relative z-10">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-radar text-blue-400"></i> Engenharia Reversa: Os 3 Poderes
+                        </h2>
+                        <p class="text-gray-400 text-sm mt-1 max-w-2xl">Navegue pela estrutura financeira do Estado. O centro representa o montante total. Clique nas fatias para mergulhar nos gastos de cada poder (Executivo, Legislativo e Judiciário), divididos entre Salários Base e Benefícios Extras.</p>
+                    </div>
+                    <span class="bg-blue-900 text-blue-200 text-xs font-bold px-3 py-1 rounded-full border border-blue-700 shadow-inner">
+                        INTERATIVO
+                    </span>
+                </div>
+                
+                <!-- Container do Gráfico Radial (ECharts) -->
+                <div id="sunburstChart" class="w-full h-[500px] mt-4 relative z-10"></div>
+                <div class="text-center text-xs text-gray-500 mt-2">Dica: Clique no centro de qualquer círculo para voltar o zoom.</div>
+            </section>
+            
+            <!-- Resumo (Dashboard Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Custo Total da Tela</p>
+                            <h2 class="text-2xl font-bold text-gray-900 mt-1" id="totalCost">R$ 0,00</h2>
+                        </div>
+                        <div class="p-2 bg-red-100 text-red-600 rounded-lg"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4">Soma salários + benefícios</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Benefícios e Penduricalhos</p>
+                            <h2 class="text-2xl font-bold benefit-color mt-1" id="totalBenefits">R$ 0,00</h2>
+                        </div>
+                        <div class="p-2 bg-green-100 text-green-600 rounded-lg"><i class="fa-solid fa-piggy-bank"></i></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4">Cotas, auxílios, indenizações</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Maior Custo Unitário</p>
+                            <h2 class="text-2xl font-bold text-blue-600 mt-1" id="maxSalary">R$ 0,00</h2>
+                        </div>
+                        <div class="p-2 bg-blue-100 text-blue-600 rounded-lg"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4 truncate w-full" id="maxSalaryName">Buscando...</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Registros Analisados</p>
+                            <h2 class="text-2xl font-bold text-gray-900 mt-1" id="totalRecords">0</h2>
+                        </div>
+                        <div class="p-2 bg-purple-100 text-purple-600 rounded-lg"><i class="fa-solid fa-database"></i></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4">Listados no banco de dados abaixo</p>
+                </div>
+            </div>
+
+            <!-- Gráficos Menores -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <!-- Gráfico Comparativo Oficial -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="text-md font-bold text-gray-900">Custo Total: Congresso vs Bolsa Família</h3>
+                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-200">DADOS OFICIAIS (LOA)</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">Gasto mensal real (Folha + Custeio) da Câmara/Senado contra o Bolsa Família.</p>
+                    <div class="relative h-64">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Gráfico por Estado -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                    <h3 class="text-md font-bold text-gray-900 mb-1">Gasto Consolidado por Estado (UF)</h3>
+                    <p class="text-xs text-gray-500 mb-4">Soma de salários e benefícios dos servidores listados abaixo por unidade federativa.</p>
+                    <div class="relative h-64">
+                        <canvas id="stateChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela Principal -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-5 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gray-50">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900"><i class="fa-solid fa-list-ul mr-2 text-gray-500"></i>Listagem Analítica Individual</h3>
+                        <p class="text-sm text-gray-500 mt-1">Salários base vs. <span class="benefit-color font-semibold">Raio-X de Benefícios</span>.</p>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <select id="roleFilter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow-sm">
+                            <option value="all">Todos os Setores e Cargos</option>
+                            <option value="Executivo">Poder Executivo (Presidente/Vice)</option>
+                            <option value="Senador">Senadores (Legislativo)</option>
+                            <option value="Deputado Federal">Deputados Federais (Legislativo)</option>
+                            <option value="Deputado Estadual">Deputados Estaduais (Legislativo)</option>
+                            <option value="Judiciário">Poder Judiciário (Juízes/Ministros)</option>
+                            <option value="Assessor">Assessores (Geral)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
+                        <thead class="text-xs text-gray-700 uppercase bg-white border-b-2 border-gray-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-5 font-semibold">Nome & Cargo</th>
+                                <th scope="col" class="px-6 py-5 font-semibold">Salário Base (Bruto)</th>
+                                <th scope="col" class="px-6 py-5 font-semibold benefit-color"><i class="fa-solid fa-list-check mr-1"></i> Raio-X de Despesas (Extras)</th>
+                                <th scope="col" class="px-6 py-5 font-semibold text-purple-700"><i class="fa-solid fa-network-wired mr-1"></i> Conexão Familiar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-gray-100 bg-white">
+                            <!-- Os dados serão injetados aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="noResults" class="hidden p-12 text-center text-gray-500 bg-white">
+                    <i class="fa-solid fa-magnifying-glass-minus text-5xl mb-4 text-gray-300"></i>
+                    <p class="text-lg font-medium text-gray-600">Nenhum registro encontrado.</p>
+                    <p class="text-sm">Tente limpar os filtros ou buscar por outro termo.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Formatar Moeda Brasileira
+        const formatCurrency = (value) => {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        };
+
+        // --- INICIALIZAÇÃO DA PLANTA RADIAL (ECHARTS SUNBURST) ---
+        function initSunburst() {
+            const chartDom = document.getElementById('sunburstChart');
+            const myChart = echarts.init(chartDom);
+            
+            const data = [{
+                name: 'Brasil\nOrçamento',
+                itemStyle: { color: '#1e3a8a' }, // Azul escuro central
+                children: [
+                    // PODER LEGISLATIVO
+                    {
+                        name: 'Legislativo',
+                        itemStyle: { color: '#f59e0b' }, // Amarelo
+                        children: [
+                            {
+                                name: 'Câmara',
+                                children: [
+                                    { name: 'Folha Base', value: 1200, itemStyle: { color: '#fcd34d' } },
+                                    { name: 'Verba Gabinete', value: 3400, itemStyle: { color: '#fbbf24' } },
+                                    { name: 'Cotão (CEAP)', value: 1800, itemStyle: { color: '#f59e0b' } }
+                                ]
+                            },
+                            {
+                                name: 'Senado',
+                                children: [
+                                    { name: 'Folha Base', value: 600, itemStyle: { color: '#fbbf24' } },
+                                    { name: 'Benefícios', value: 900, itemStyle: { color: '#d97706' } }
+                                ]
+                            }
+                        ]
+                    },
+                    // PODER JUDICIÁRIO
+                    {
+                        name: 'Judiciário',
+                        itemStyle: { color: '#b91c1c' }, // Vermelho
+                        children: [
+                            {
+                                name: 'STF / STJ',
+                                children: [
+                                    { name: 'Salários', value: 400, itemStyle: { color: '#f87171' } },
+                                    { name: 'Indenizações', value: 350, itemStyle: { color: '#ef4444' } }
+                                ]
+                            },
+                            {
+                                name: 'Justiça Federal',
+                                children: [
+                                    { name: 'Salários', value: 2500, itemStyle: { color: '#ef4444' } },
+                                    { name: 'Aux. Saúde/Livro', value: 1800, itemStyle: { color: '#dc2626' } },
+                                    { name: 'Venda de Férias', value: 1200, itemStyle: { color: '#b91c1c' } }
+                                ]
+                            }
+                        ]
+                    },
+                    // PODER EXECUTIVO
+                    {
+                        name: 'Executivo',
+                        itemStyle: { color: '#059669' }, // Verde
+                        children: [
+                            {
+                                name: 'Presidência',
+                                children: [
+                                    { name: 'Cartão Corp.', value: 800, itemStyle: { color: '#34d399' } },
+                                    { name: 'Gabinete/Segurança', value: 1500, itemStyle: { color: '#10b981' } }
+                                ]
+                            },
+                            {
+                                name: 'Ministérios',
+                                children: [
+                                    { name: 'Folha', value: 8500, itemStyle: { color: '#059669' } },
+                                    { name: 'Comissionados', value: 4200, itemStyle: { color: '#047857' } }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }];
+
+            const option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params) {
+                        return `<b>${params.name}</b><br/>Proporção estimada: ${params.value ? params.value : 'Raiz'}`;
+                    }
+                },
+                series: {
+                    type: 'sunburst',
+                    data: data,
+                    radius: [0, '95%'],
+                    sort: undefined,
+                    emphasis: { focus: 'ancestor' },
+                    label: {
+                        rotate: 'radial',
+                        color: '#fff',
+                        textBorderColor: '#000',
+                        textBorderWidth: 1,
+                        fontSize: 11
+                    },
+                    itemStyle: {
+                        borderRadius: 4,
+                        borderWidth: 2,
+                        borderColor: '#111827' // Cor do fundo dark
+                    }
+                }
+            };
+
+            myChart.setOption(option);
+            
+            // Redimensionar gráfico quando a janela mudar
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+        }
+
+        // Base de Dados Completa (com 3 Poderes)
+        const mockData = [
+            // --- PODER EXECUTIVO ---
+            { id: 301, name: "Luiz Inácio Lula da Silva", role: "Presidente", state: "DF", salary: 44008.52, benefits: 1450000.00, familyHighest: "Nenhuma conexão pública detectada" },
+            { id: 302, name: "Geraldo Alckmin", role: "Vice-Presidente", state: "DF", salary: 44008.52, benefits: 280000.00, familyHighest: "Nenhuma conexão pública detectada" },
+
+            // --- PODER JUDICIÁRIO ---
+            { id: 201, name: "Alexandre de Moraes", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 12500.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 202, name: "Gilmar Mendes", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 15200.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 203, name: "Luís Roberto Barroso", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 11000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 204, name: "Carmen Lúcia", role: "Ministra STF", state: "DF", salary: 44008.52, benefits: 10500.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 205, name: "Flávio Dino", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 12000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 206, name: "Marcelo Bretas", role: "Juiz Federal", state: "RJ", salary: 37600.00, benefits: 45400.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 207, name: "Gabriela Hardt", role: "Juíza Federal", state: "PR", salary: 35500.00, benefits: 22000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 208, name: "Eduardo Appio", role: "Juiz Federal", state: "PR", salary: 37600.00, benefits: 28000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 209, name: "Thompson Flores", role: "Desembargador", state: "RS", salary: 39200.00, benefits: 51000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 210, name: "Rogério Favreto", role: "Desembargador", state: "RS", salary: 39200.00, benefits: 39000.00, familyHighest: "Nenhuma conexão detectada" },
+
+            // --- SENADORES ---
+            { id: 1, name: "Rodrigo Pacheco", role: "Senador", state: "MG", salary: 44008.52, benefits: 95000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 3, name: "Davi Alcolumbre", role: "Senador", state: "AP", salary: 44008.52, benefits: 88000.00, familyHighest: "Irmão (Suplente) - R$ 0,00" },
+            { id: 6, name: "Flávio Bolsonaro", role: "Senador", state: "RJ", salary: 44008.52, benefits: 72000.00, familyHighest: "Irmão (Deputado) - R$ 44.008,52" },
+            { id: 7, name: "Randolfe Rodrigues", role: "Senador", state: "AP", salary: 44008.52, benefits: 64000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 10, name: "Renan Calheiros", role: "Senador", state: "AL", salary: 44008.52, benefits: 80000.00, familyHighest: "Filho (Ministro) - R$ 44.008,52" },
+            { id: 11, name: "Sérgio Moro", role: "Senador", state: "PR", salary: 44008.52, benefits: 61000.00, familyHighest: "Esposa (Deputada) - R$ 44.008,52" },
+            { id: 12, name: "Damares Alves", role: "Senador", state: "DF", salary: 44008.52, benefits: 55000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 13, name: "Cid Gomes", role: "Senador", state: "CE", salary: 44008.52, benefits: 70000.00, familyHighest: "Irmão (Ex-Ministro) - R$ 0,00" },
+            { id: 14, name: "Jacques Wagner", role: "Senador", state: "BA", salary: 44008.52, benefits: 75000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 15, name: "Hamilton Mourão", role: "Senador", state: "RS", salary: 44008.52, benefits: 68000.00, familyHighest: "Nenhuma conexão detectada" },
+            
+            // --- DEPUTADOS FEDERAIS ---
+            { id: 2, name: "Arthur Lira", role: "Deputado Federal", state: "AL", salary: 44008.52, benefits: 112000.00, familyHighest: "Pai (Prefeito) - R$ 20.000,00" },
+            { id: 4, name: "Gleisi Hoffmann", role: "Deputado Federal", state: "PR", salary: 44008.52, benefits: 85000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 5, name: "Eduardo Bolsonaro", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 90000.00, familyHighest: "Pai (Ex-Presidente) - Aposentadoria" },
+            { id: 8, name: "Nikolas Ferreira", role: "Deputado Federal", state: "MG", salary: 44008.52, benefits: 75000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 9, name: "Guilherme Boulos", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 88000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 30, name: "Carla Zambelli", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 81000.00, familyHighest: "Irmão (Deputado Est.) - R$ 33.006,39" },
+            { id: 31, name: "Tabata Amaral", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 65000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 32, name: "Bibo Nunes", role: "Deputado Federal", state: "RS", salary: 44008.52, benefits: 70000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 33, name: "Erika Hilton", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 82000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 34, name: "Tiririca", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 60000.00, familyHighest: "Nenhuma conexão detectada" },
+
+            // --- DEPUTADOS ESTADUAIS ---
+            { id: 20, name: "Eduardo Suplicy", role: "Deputado Estadual", state: "SP", salary: 33006.39, benefits: 45000.00, familyHighest: "Filho (Ex-Vereador) - R$ 0,00" },
+            { id: 21, name: "Carmelo Neto", role: "Deputado Estadual", state: "CE", salary: 33006.39, benefits: 39000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 22, name: "Marina do MST", role: "Deputado Estadual", state: "RJ", salary: 33006.39, benefits: 42000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 23, name: "Bruno Engler", role: "Deputado Estadual", state: "MG", salary: 33006.39, benefits: 48000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 24, name: "Luciana Genro", role: "Deputado Estadual", state: "RS", salary: 33006.39, benefits: 41500.00, familyHighest: "Pai (Ex-Governador) - Aposentadoria" },
+            { id: 25, name: "Renato Freitas", role: "Deputado Estadual", state: "PR", salary: 33006.39, benefits: 37000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 26, name: "Delegado Caveira", role: "Deputado Estadual", state: "PA", salary: 33006.39, benefits: 44000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 27, name: "Olivia Santana", role: "Deputado Estadual", state: "BA", salary: 33006.39, benefits: 38000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 28, name: "Coronel Telhada", role: "Deputado Estadual", state: "SP", salary: 33006.39, benefits: 49000.00, familyHighest: "Filho (Dep. Federal) - R$ 44.008,52" },
+            { id: 29, name: "Macaé Evaristo", role: "Deputado Estadual", state: "MG", salary: 33006.39, benefits: 40000.00, familyHighest: "Nenhuma conexão detectada" },
+
+            // --- ASSESSORES ---
+            { id: 101, name: "João Silva", role: "Assessor", state: "DF", salary: 15500.00, benefits: 2500.00, familyHighest: "Tio (Deputado Federal) - R$ 44.008,52" },
+            { id: 102, name: "Maria Oliveira", role: "Assessor", state: "DF", salary: 19800.00, benefits: 3000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 103, name: "Carlos Ferreira", role: "Assessor", state: "DF", salary: 8900.00, benefits: 1500.00, familyHighest: "Pai (Senador) - R$ 44.008,52" },
+            { id: 104, name: "Ana Souza", role: "Assessor", state: "SP", salary: 12000.00, benefits: 2000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 105, name: "Pedro Santos", role: "Assessor", state: "RJ", salary: 9500.00, benefits: 1800.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 106, name: "Lucas Mendes", role: "Assessor", state: "MG", salary: 18000.00, benefits: 2800.00, familyHighest: "Esposa (Juíza) - R$ 37.600,00" },
+            { id: 107, name: "Camila Rocha", role: "Assessor", state: "PR", salary: 7500.00, benefits: 1200.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 108, name: "Fernando Costa", role: "Assessor", state: "RS", salary: 14200.00, benefits: 2200.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 109, name: "Beatriz Lima", role: "Assessor", state: "BA", salary: 11300.00, benefits: 1900.00, familyHighest: "Irmão (Vereador) - R$ 15.000,00" },
+            { id: 110, name: "Ricardo Alves", role: "Assessor", state: "CE", salary: 16700.00, benefits: 2600.00, familyHighest: "Nenhuma conexão detectada" }
+        ];
+
+        // Lógica Inteligente para o Raio-X de Despesas
+        mockData.forEach(item => {
+            const isJudiciary = ['Ministro STF', 'Ministra STJ', 'Desembargador', 'Juiz Federal', 'Juíza Federal'].includes(item.role);
+            const isExecutive = ['Presidente', 'Vice-Presidente'].includes(item.role);
+
+            if (isExecutive) {
+                item.breakdown = {
+                    label1: 'Cartão Corporativo:', val1: item.benefits * 0.70,
+                    label2: 'Despesas de Gabinete:', val2: item.benefits * 0.20,
+                    label3: 'Apoio/Segurança:', val3: item.benefits * 0.10
+                };
+            } else if (isJudiciary) {
+                item.breakdown = {
+                    label1: 'Indenizações/Venda Férias:', val1: item.benefits * 0.55,
+                    label2: 'Auxílio Saúde/Paletó:', val2: item.benefits * 0.30,
+                    label3: 'Auxílio Moradia/Livro:', val3: item.benefits * 0.15
+                };
+            } else if (item.role !== 'Assessor') {
+                const moradia = 4253.00;
+                let remaining = item.benefits - moradia;
+                if (remaining < 0) remaining = 0;
+                
+                item.breakdown = {
+                    label1: 'Cota (CEAP/Voos):', val1: remaining * 0.65,
+                    label2: 'Aux. Moradia:', val2: moradia,
+                    label3: 'Verba Gabinete:', val3: remaining * 0.35
+                };
+            } else {
+                item.breakdown = {
+                    label1: 'Aux. Alimentação:', val1: item.benefits * 0.65,
+                    label2: 'Auxílio Saúde:', val2: item.benefits * 0.35,
+                    label3: 'Outros:', val3: 0
+                };
+            }
+        });
+
+        const tableBody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const roleFilter = document.getElementById('roleFilter');
+        const noResults = document.getElementById('noResults');
+
+        let comparisonChartInstance = null;
+        let stateChartInstance = null;
+
+        // Renderizar Tabela
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            data.forEach(item => {
+                const total = item.salary + item.benefits;
+                
+                let roleIcon = 'fa-user';
+                if(item.role === 'Presidente' || item.role === 'Vice-Presidente') roleIcon = 'fa-flag text-green-600';
+                if(item.role === 'Senador') roleIcon = 'fa-landmark text-yellow-600';
+                if(item.role === 'Deputado Federal') roleIcon = 'fa-users text-blue-600';
+                if(item.role === 'Deputado Estadual') roleIcon = 'fa-map-location-dot text-indigo-600';
+                if(['Ministro STF', 'Ministra STF', 'Desembargador', 'Juiz Federal', 'Juíza Federal'].includes(item.role)) roleIcon = 'fa-gavel text-red-800';
+                if(item.role === 'Assessor') roleIcon = 'fa-user-tie text-gray-500';
+
+                const isFamilyHigh = item.familyHighest.includes('R$') && !item.familyHighest.includes('Nenhuma');
+
+                const row = `
+                    <tr class="hover:bg-blue-50 transition duration-150 ease-in-out">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-50 border border-gray-200 shadow-sm flex items-center justify-center text-lg">
+                                    <i class="fa-solid ${roleIcon}"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900 text-base">${item.name}</div>
+                                    <div class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded inline-block mt-1">${item.role} - ${item.state}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 font-semibold text-gray-700 text-base">
+                            ${formatCurrency(item.salary)}
+                        </td>
+                        <td class="px-6 py-5 min-w-[280px] bg-green-50/30 border-l border-r border-green-100/50">
+                            <div class="font-black text-xl text-green-700 mb-3 tracking-tight">
+                                + ${formatCurrency(item.benefits)}
+                            </div>
+                            <div class="border-t border-green-200 pt-3 text-xs space-y-2">
+                                <div class="flex justify-between items-center text-gray-600">
+                                    <span>${item.breakdown.label1}</span> 
+                                    <span class="font-bold text-green-700">${formatCurrency(item.breakdown.val1)}</span>
+                                </div>
+                                <div class="flex justify-between items-center text-gray-600">
+                                    <span>${item.breakdown.label2}</span> 
+                                    <span class="font-bold text-green-700">${formatCurrency(item.breakdown.val2)}</span>
+                                </div>
+                                ${item.breakdown.val3 > 0 ? `
+                                <div class="flex justify-between items-center text-gray-600">
+                                    <span>${item.breakdown.label3}</span> 
+                                    <span class="font-bold text-green-700">${formatCurrency(item.breakdown.val3)}</span>
+                                </div>` : ''}
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm ${isFamilyHigh ? 'bg-purple-100 text-purple-800 border border-purple-200' : 'bg-gray-100 text-gray-500 border border-gray-200'}">
+                                ${isFamilyHigh ? '<i class="fa-solid fa-link"></i>' : '<i class="fa-solid fa-unlink"></i>'} ${item.familyHighest}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Atualizar Dashboard Cards
+        function updateDashboard(data) {
+            let totalSalaries = 0;
+            let totalBens = 0;
+            let maxSal = 0;
+            let maxSalName = '';
+
+            data.forEach(item => {
+                const totalItem = item.salary + item.benefits;
+                totalSalaries += item.salary;
+                totalBens += item.benefits;
+                
+                if (totalItem > maxSal) {
+                    maxSal = totalItem;
+                    maxSalName = `${item.name} (${item.role})`;
+                }
+            });
+
+            document.getElementById('totalCost').innerText = formatCurrency(totalSalaries + totalBens);
+            document.getElementById('totalBenefits').innerText = formatCurrency(totalBens);
+            document.getElementById('maxSalary').innerText = formatCurrency(maxSal);
+            document.getElementById('maxSalaryName').innerText = maxSalName;
+            document.getElementById('totalRecords').innerText = data.length;
+        }
+
+        // Atualizar Gráficos Chart.js
+        function updateCharts(data) {
+            const custoCongressoNacionalMes = 1160000000; 
+            const orcamentoBolsaFamiliaMes = 13330000000; 
+            
+            const ctxComp = document.getElementById('comparisonChart').getContext('2d');
+            if (comparisonChartInstance) comparisonChartInstance.destroy();
+            
+            comparisonChartInstance = new Chart(ctxComp, {
+                type: 'bar',
+                data: {
+                    labels: ['Folha Congresso (Mês)', 'Bolsa Família (Mês)'],
+                    datasets: [{
+                        data: [custoCongressoNacionalMes, orcamentoBolsaFamiliaMes],
+                        backgroundColor: ['#ef4444', '#059669'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { 
+                                callback: (val) => {
+                                    if (val >= 1000000000) return 'R$ ' + (val / 1000000000).toFixed(1) + ' Bi';
+                                    if (val >= 1000000) return 'R$ ' + (val / 1000000).toFixed(0) + ' Mi';
+                                    return val;
+                                }
+                            }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const stateData = {};
+            data.forEach(item => {
+                if(!stateData[item.state]) stateData[item.state] = 0;
+                stateData[item.state] += (item.salary + item.benefits);
+            });
+
+            const stateLabels = Object.keys(stateData).sort((a,b) => stateData[b] - stateData[a]).slice(0, 10);
+            const stateValues = stateLabels.map(state => stateData[state]);
+
+            const ctxState = document.getElementById('stateChart').getContext('2d');
+            if (stateChartInstance) stateChartInstance.destroy();
+
+            stateChartInstance = new Chart(ctxState, {
+                type: 'bar',
+                data: {
+                    labels: stateLabels,
+                    datasets: [{
+                        label: 'Gasto Total',
+                        data: stateValues,
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: (context) => formatCurrency(context.raw) } }
+                    }
+                }
+            });
+        }
+
+        // Filtros e Buscas
+        function filterData() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const role = roleFilter.value;
+
+            const filteredData = mockData.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                      item.role.toLowerCase().includes(searchTerm) ||
+                                      item.familyHighest.toLowerCase().includes(searchTerm);
+                
+                let matchesRole = false;
+                if (role === 'all') matchesRole = true;
+                else if (role === 'Executivo') {
+                    matchesRole = ['Presidente', 'Vice-Presidente'].includes(item.role);
+                }
+                else if (role === 'Judiciário') {
+                    matchesRole = ['Ministro STF', 'Ministra STF', 'Desembargador', 'Juiz Federal', 'Juíza Federal'].includes(item.role);
+                } else {
+                    matchesRole = item.role === role;
+                }
+                
+                return matchesSearch && matchesRole;
+            });
+
+            renderTable(filteredData);
+            updateDashboard(filteredData);
+            updateCharts(filteredData); // Os gráficos oficiais não mudam o valor base de bilhões, apenas o estado.
+        }
+
+        searchInput.addEventListener('input', filterData);
+        roleFilter.addEventListener('change', filterData);
+
+        // Inicialização
+        window.onload = () => {
+            initSunburst(); // Inicia a Engenharia Reversa
+            renderTable(mockData);
+            updateDashboard(mockData);
+            updateCharts(mockData);
+        };
+    </script>
+</body>
+</html>
