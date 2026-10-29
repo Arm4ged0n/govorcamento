@@ -25,17 +25,23 @@
             <h1 class="text-xl font-bold tracking-tight">Transparência<br><span class="text-sm font-normal text-gray-400">Política BR</span></h1>
         </div>
         <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto pb-4">
-            <div class="text-xs uppercase font-bold text-gray-500 mb-2 mt-4 px-2">Visualização</div>
-            <a href="#" class="flex items-center gap-3 bg-gray-800 text-white px-4 py-3 rounded-lg transition"><i class="fa-solid fa-chart-line"></i> Dashboard Geral</a>
-            <a href="#radial-section" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-bullseye"></i> Engenharia Reversa</a>
-            
-            <div class="text-xs uppercase font-bold text-gray-500 mb-2 mt-6 px-2">Os 3 Poderes</div>
-            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-flag"></i> Executivo</a>
-            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-landmark"></i> Legislativo</a>
-            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-gavel"></i> Judiciário</a>
+            <div class="text-xs uppercase font-bold text-gray-500 mb-2 mt-4 px-2">Áreas (Estilo Politicômetro)</div>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-map-location-dot"></i> Mapa</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-city"></i> Na sua cidade</a>
+            <a href="#" class="flex items-center gap-3 bg-gray-800 text-white px-4 py-3 rounded-lg transition"><i class="fa-solid fa-users"></i> Quem é quem</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-stopwatch"></i> Impostômetro</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-landmark"></i> Congresso</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-handshake-angle"></i> Me representa</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-scale-unbalanced"></i> Comparar</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-building-columns"></i> Governos</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-check-to-slot"></i> Eleições</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-flag"></i> Partidos</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-gavel"></i> STF</a>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white hover:bg-gray-800 px-4 py-3 rounded-lg transition"><i class="fa-solid fa-id-badge"></i> Cargos</a>
         </nav>
-        <div class="p-4 text-xs text-gray-500 border-t border-gray-800">
-            Dados estruturais baseados na LOA (Lei Orçamentária) e Transparência.
+        <div class="p-4 text-[10px] text-gray-500 border-t border-gray-800 leading-tight space-y-3 mt-auto">
+            <p><strong class="text-gray-300">Aberto e gratuito, para todo mundo.</strong><br>Só dados oficiais e públicos, em linguagem simples. Sem ranking, nota ou recomendação de voto.</p>
+            <p>Siga: <a href="#" class="text-blue-400 hover:underline"><i class="fa-brands fa-instagram"></i> Instagram</a> | <a href="#" class="text-green-400 hover:underline"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></p>
         </div>
     </aside>
 
@@ -43,15 +49,27 @@
     <main class="flex-1 flex flex-col h-full overflow-y-auto w-full scroll-smooth">
         
         <!-- Header -->
-        <header class="glass-panel sticky top-0 z-10 border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
-            <div class="flex items-center gap-4 w-full max-w-2xl">
-                <button class="md:hidden text-gray-600 hover:text-gray-900"><i class="fa-solid fa-bars text-xl"></i></button>
-                <div class="relative w-full">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="searchInput" placeholder="Buscar político, cargo ou familiar..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm">
+        <header class="glass-panel sticky top-0 z-10 border-b border-gray-200 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-sm gap-4">
+            <div class="flex flex-col w-full max-w-3xl">
+                <div class="flex items-center gap-4 w-full">
+                    <button class="md:hidden text-gray-600 hover:text-gray-900"><i class="fa-solid fa-bars text-xl"></i></button>
+                    <div class="relative w-full">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar político, cargo, cidade ou familiar..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-sm shadow-sm">
+                    </div>
+                </div>
+                <!-- Filtros rápidos estilo Politicômetro -->
+                <div class="mt-3 flex flex-wrap items-center gap-2 text-xs md:ml-10">
+                    <span class="text-gray-500 font-medium mr-1">O que ver no mapa:</span>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Quem governa</button>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Contas</button>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Escolas</button>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Obras</button>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium text-green-700"><i class="fa-solid fa-sack-dollar mr-1"></i>Dinheiro que chegou</button>
+                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Votações</button>
                 </div>
             </div>
-            <div class="hidden sm:flex items-center gap-4">
+            <div class="hidden sm:flex items-center gap-4 mt-2 sm:mt-0">
                 <span class="text-sm font-medium text-gray-600"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i> Banco Ativo</span>
                 <div class="h-8 w-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-md border-2 border-white">BR</div>
             </div>
@@ -82,24 +100,83 @@
                 <div class="text-center text-xs text-gray-500 mt-2">Dica: Clique no centro de qualquer círculo para voltar o zoom.</div>
             </section>
             
+            <!-- IMPOSTÔMETRO (Inspirado no Politicômetro) -->
+            <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-lg border border-gray-700 p-5 md:p-6 mt-6 flex flex-col md:flex-row items-center justify-between overflow-hidden relative">
+                <div class="absolute -right-10 -top-10 opacity-10">
+                    <i class="fa-solid fa-coins text-9xl text-yellow-400"></i>
+                </div>
+                <div class="relative z-10 mb-4 md:mb-0">
+                    <h3 class="text-gray-300 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-stopwatch text-yellow-400 text-lg animate-pulse"></i> Impostômetro Nacional
+                    </h3>
+                    <p class="text-gray-400 text-xs mt-1 max-w-md">Arrecadação de tributos em tempo real (estimativa anual). Compare o quanto você paga com o quanto custa a máquina pública.</p>
+                </div>
+                <div class="relative z-10 text-right">
+                    <div id="impostometro" class="text-3xl md:text-5xl font-black text-yellow-400 tracking-tighter" style="font-variant-numeric: tabular-nums;">
+                        R$ 2.450.000.000,00
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel de Dados Oficiais (Visão Geral - Politicômetro) -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900">Raio-X do Brasil: 70.816 políticos eleitos</h3>
+                        <p class="text-sm text-gray-500">Da Câmara Municipal a Brasília no cargo hoje.</p>
+                    </div>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mt-2 md:mt-0 border border-blue-200">Fonte: TSE</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 text-center">
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">2</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Presidência e vice</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">81</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Senadores</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">513</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Deputados Federais</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">40</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Governadores e vices</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">1.018</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Deputados Estaduais</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">11.029</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Prefeitos e vices</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="text-lg font-black text-gray-800">58.133</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Vereadores</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Resumo (Dashboard Cards) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Custo Total da Tela</p>
+                            <p class="text-sm text-gray-500 font-medium">Custo Total Estimado (Mês)</p>
                             <h2 class="text-2xl font-bold text-gray-900 mt-1" id="totalCost">R$ 0,00</h2>
                         </div>
                         <div class="p-2 bg-red-100 text-red-600 rounded-lg"><i class="fa-solid fa-money-bill-trend-up"></i></div>
                     </div>
-                    <p class="text-xs text-gray-400 mt-4">Soma salários + benefícios</p>
+                    <p class="text-xs text-gray-400 mt-4">Soma salários + benefícios da lista</p>
                 </div>
                 
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col justify-between hover:shadow-md transition">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Benefícios e Penduricalhos</p>
-                            <h2 class="text-2xl font-bold benefit-color mt-1" id="totalBenefits">R$ 0,00</h2>
+                            <p class="text-sm text-gray-500 font-medium">Total de Benefícios Extras</p>
+                            <h2 class="text-2xl font-bold text-green-600 mt-1" id="totalBenefits">R$ 0,00</h2>
                         </div>
                         <div class="p-2 bg-green-100 text-green-600 rounded-lg"><i class="fa-solid fa-piggy-bank"></i></div>
                     </div>
@@ -157,8 +234,32 @@
                     <div>
                         <h3 class="text-lg font-bold text-gray-900"><i class="fa-solid fa-list-ul mr-2 text-gray-500"></i>Listagem Analítica Individual</h3>
                     </div>
-                    <div class="flex gap-2 w-full sm:w-auto">
-                        <select id="roleFilter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow-sm">
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <select id="stateFilter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2.5 shadow-sm">
+                            <option value="all">Todos os Estados (UF)</option>
+                            <option value="DF">DF</option>
+                            <option value="SP">SP</option>
+                            <option value="RJ">RJ</option>
+                            <option value="MG">MG</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="PR">PR</option>
+                            <option value="CE">CE</option>
+                        </select>
+                        <select id="partyFilter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2.5 shadow-sm">
+                            <option value="all">Todos os Partidos</option>
+                            <option value="PT">PT</option>
+                            <option value="PL">PL</option>
+                            <option value="MDB">MDB</option>
+                            <option value="PSDB">PSDB</option>
+                            <option value="UNIÃO">UNIÃO</option>
+                            <option value="PSOL">PSOL</option>
+                            <option value="PP">PP</option>
+                            <option value="PSD">PSD</option>
+                            <option value="PSB">PSB</option>
+                            <option value="S/P">Sem Partido (S/P)</option>
+                        </select>
+                        <select id="roleFilter" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2.5 shadow-sm">
                             <option value="all">Todos os Setores e Cargos</option>
                             <option value="Executivo">Poder Executivo (Presidente/Vice)</option>
                             <option value="Judiciário">Poder Judiciário (Juízes/Ministros)</option>
@@ -170,6 +271,34 @@
                     </div>
                 </div>
                 
+                <!-- Indice A-Z estilo Politicômetro -->
+                <div class="bg-gray-50 border-b border-gray-200 px-5 py-2 overflow-x-auto whitespace-nowrap flex items-center text-sm">
+                    <span class="text-gray-400 font-bold uppercase text-xs mr-3">A–Z</span>
+                    <div class="flex gap-1 text-blue-600 font-medium" id="alphabetFilter">
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition bg-blue-100 text-blue-800">Todos</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">A</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">B</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">C</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">D</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">E</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">F</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">G</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">H</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">I</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">J</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">L</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">M</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">N</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">O</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">P</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">R</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">S</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">T</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">V</a>
+                        <a href="#" class="px-2 py-1 rounded hover:bg-blue-100 transition">Z</a>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 whitespace-nowrap">
                         <thead class="text-xs text-gray-700 uppercase bg-white border-b-2 border-gray-200">
@@ -192,6 +321,45 @@
                     <p class="text-sm">Tente limpar os filtros ou buscar por outro termo.</p>
                 </div>
             </div>
+
+            <!-- Footer Politicômetro Style -->
+            <footer class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8 text-xs text-gray-500 space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <div>
+                        <h4 class="font-bold text-gray-700 mb-3 text-sm uppercase">Áreas</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-600 transition">Mapa</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Quem é quem</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Impostômetro</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Congresso</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Quem me representa</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Governos</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Eleições</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 mb-3 text-sm uppercase">Sobre o site</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-blue-600 transition">O que é a plataforma</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Metodologia e fontes</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Como atualizamos</a></li>
+                            <li><a href="#" class="hover:text-blue-600 transition">Privacidade</a></li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-2 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                        <h4 class="font-bold text-gray-700 mb-2 text-sm uppercase"><i class="fa-regular fa-envelope mr-1 text-gray-400"></i> Receba as novidades</h4>
+                        <p class="mb-3 text-gray-500">Um e-mail quando entram dados novos. Sem propaganda.</p>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="email" placeholder="Seu melhor e-mail" class="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-2/3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <button class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition font-medium sm:w-1/3">Quero receber</button>
+                        </div>
+                        <p class="mt-2 text-[10px] text-gray-400">O e-mail serve só para isso. Consulte a Privacidade.</p>
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-gray-100 text-[10px] leading-relaxed text-gray-400">
+                    © 2026 Transparência Política BR · inspirado por iniciativas de utilidade pública, sem fins comerciais. Código e design interativo desenvolvidos para demonstração. Dados da Câmara, do Senado, do TSE, do IBGE, da Receita Federal, do STF e das Assembleias e Câmaras Municipais que publicam dados abertos, citados nas respectivas seções.
+                </div>
+            </footer>
         </div>
     </main>
 
@@ -296,36 +464,36 @@
 
         const mockData = [
             // PODER EXECUTIVO
-            { id: 301, name: "Luiz Inácio Lula da Silva", role: "Presidente", state: "DF", salary: 44008.52, benefits: 1450000.00, familyHighest: "Nenhuma conexão pública detectada" },
-            { id: 302, name: "Geraldo Alckmin", role: "Vice-Presidente", state: "DF", salary: 44008.52, benefits: 280000.00, familyHighest: "Nenhuma conexão pública detectada" },
+            { id: 301, name: "Luiz Inácio Lula da Silva", role: "Presidente", state: "DF", party: "PT", salary: 44008.52, benefits: 1450000.00, familyHighest: "Nenhuma conexão pública detectada" },
+            { id: 302, name: "Geraldo Alckmin", role: "Vice-Presidente", state: "DF", party: "PSB", salary: 44008.52, benefits: 280000.00, familyHighest: "Nenhuma conexão pública detectada" },
 
             // PODER JUDICIÁRIO
-            { id: 201, name: "Alexandre de Moraes", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 12500.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 202, name: "Gilmar Mendes", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 15200.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 203, name: "Luís Roberto Barroso", role: "Ministro STF", state: "DF", salary: 44008.52, benefits: 11000.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 204, name: "Carmen Lúcia", role: "Ministra STF", state: "DF", salary: 44008.52, benefits: 10500.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 206, name: "Marcelo Bretas", role: "Juiz Federal", state: "RJ", salary: 37600.00, benefits: 45400.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 207, name: "Gabriela Hardt", role: "Juíza Federal", state: "PR", salary: 35500.00, benefits: 22000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 201, name: "Alexandre de Moraes", role: "Ministro STF", state: "DF", party: "S/P", salary: 44008.52, benefits: 12500.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 202, name: "Gilmar Mendes", role: "Ministro STF", state: "DF", party: "S/P", salary: 44008.52, benefits: 15200.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 203, name: "Luís Roberto Barroso", role: "Ministro STF", state: "DF", party: "S/P", salary: 44008.52, benefits: 11000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 204, name: "Carmen Lúcia", role: "Ministra STF", state: "DF", party: "S/P", salary: 44008.52, benefits: 10500.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 206, name: "Marcelo Bretas", role: "Juiz Federal", state: "RJ", party: "S/P", salary: 37600.00, benefits: 45400.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 207, name: "Gabriela Hardt", role: "Juíza Federal", state: "PR", party: "S/P", salary: 35500.00, benefits: 22000.00, familyHighest: "Nenhuma conexão detectada" },
 
             // SENADORES
-            { id: 1, name: "Rodrigo Pacheco", role: "Senador", state: "MG", salary: 44008.52, benefits: 95000.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 3, name: "Davi Alcolumbre", role: "Senador", state: "AP", salary: 44008.52, benefits: 88000.00, familyHighest: "Irmão (Suplente) - R$ 0,00" },
-            { id: 6, name: "Flávio Bolsonaro", role: "Senador", state: "RJ", salary: 44008.52, benefits: 72000.00, familyHighest: "Irmão (Deputado) - R$ 44.008,52" },
-            { id: 10, name: "Renan Calheiros", role: "Senador", state: "AL", salary: 44008.52, benefits: 80000.00, familyHighest: "Filho (Ministro) - R$ 44.008,52" },
+            { id: 1, name: "Rodrigo Pacheco", role: "Senador", state: "MG", party: "PSD", salary: 44008.52, benefits: 95000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 3, name: "Davi Alcolumbre", role: "Senador", state: "AP", party: "UNIÃO", salary: 44008.52, benefits: 88000.00, familyHighest: "Irmão (Suplente) - R$ 0,00" },
+            { id: 6, name: "Flávio Bolsonaro", role: "Senador", state: "RJ", party: "PL", salary: 44008.52, benefits: 72000.00, familyHighest: "Irmão (Deputado) - R$ 44.008,52" },
+            { id: 10, name: "Renan Calheiros", role: "Senador", state: "AL", party: "MDB", salary: 44008.52, benefits: 80000.00, familyHighest: "Filho (Ministro) - R$ 44.008,52" },
 
             // DEPUTADOS FEDERAIS
-            { id: 2, name: "Arthur Lira", role: "Deputado Federal", state: "AL", salary: 44008.52, benefits: 112000.00, familyHighest: "Pai (Prefeito) - R$ 20.000,00" },
-            { id: 5, name: "Eduardo Bolsonaro", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 90000.00, familyHighest: "Pai (Ex-Presidente)" },
-            { id: 9, name: "Guilherme Boulos", role: "Deputado Federal", state: "SP", salary: 44008.52, benefits: 88000.00, familyHighest: "Nenhuma conexão detectada" },
-            { id: 8, name: "Nikolas Ferreira", role: "Deputado Federal", state: "MG", salary: 44008.52, benefits: 75000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 2, name: "Arthur Lira", role: "Deputado Federal", state: "AL", party: "PP", salary: 44008.52, benefits: 112000.00, familyHighest: "Pai (Prefeito) - R$ 20.000,00" },
+            { id: 5, name: "Eduardo Bolsonaro", role: "Deputado Federal", state: "SP", party: "PL", salary: 44008.52, benefits: 90000.00, familyHighest: "Pai (Ex-Presidente)" },
+            { id: 9, name: "Guilherme Boulos", role: "Deputado Federal", state: "SP", party: "PSOL", salary: 44008.52, benefits: 88000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 8, name: "Nikolas Ferreira", role: "Deputado Federal", state: "MG", party: "PL", salary: 44008.52, benefits: 75000.00, familyHighest: "Nenhuma conexão detectada" },
 
             // DEPUTADOS ESTADUAIS
-            { id: 20, name: "Eduardo Suplicy", role: "Deputado Estadual", state: "SP", salary: 33006.39, benefits: 45000.00, familyHighest: "Filho (Ex-Vereador)" },
-            { id: 21, name: "Carmelo Neto", role: "Deputado Estadual", state: "CE", salary: 33006.39, benefits: 39000.00, familyHighest: "Nenhuma conexão detectada" },
+            { id: 20, name: "Eduardo Suplicy", role: "Deputado Estadual", state: "SP", party: "PT", salary: 33006.39, benefits: 45000.00, familyHighest: "Filho (Ex-Vereador)" },
+            { id: 21, name: "Carmelo Neto", role: "Deputado Estadual", state: "CE", party: "PL", salary: 33006.39, benefits: 39000.00, familyHighest: "Nenhuma conexão detectada" },
             
             // ASSESSORES
-            { id: 101, name: "João Silva", role: "Assessor", state: "DF", salary: 15500.00, benefits: 2500.00, familyHighest: "Tio (Deputado Federal) - R$ 44.008,52" },
-            { id: 102, name: "Maria Oliveira", role: "Assessor", state: "DF", salary: 19800.00, benefits: 3000.00, familyHighest: "Nenhuma conexão detectada" }
+            { id: 101, name: "João Silva", role: "Assessor", state: "DF", party: "S/P", salary: 15500.00, benefits: 2500.00, familyHighest: "Tio (Deputado Federal) - R$ 44.008,52" },
+            { id: 102, name: "Maria Oliveira", role: "Assessor", state: "DF", party: "S/P", salary: 19800.00, benefits: 3000.00, familyHighest: "Nenhuma conexão detectada" }
         ];
 
         mockData.forEach(item => {
@@ -397,7 +565,7 @@
                                 </div>
                                 <div>
                                     <div class="font-bold text-gray-900 text-base">${item.name}</div>
-                                    <div class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded inline-block mt-1">${item.role} - ${item.state}</div>
+                                    <div class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded inline-block mt-1">${item.role} - ${item.party} / ${item.state}</div>
                                 </div>
                             </div>
                         </td>
@@ -480,16 +648,21 @@
             // Busca agora ignora acentos e maiúsculas
             const searchTerm = removeAccents(document.getElementById('searchInput').value.toLowerCase());
             const role = document.getElementById('roleFilter').value;
+            const state = document.getElementById('stateFilter').value;
+            const party = document.getElementById('partyFilter').value;
 
             const filteredData = mockData.filter(item => {
-                const searchString = removeAccents(`${item.name} ${item.role} ${item.familyHighest}`).toLowerCase();
+                const searchString = removeAccents(`${item.name} ${item.role} ${item.party} ${item.familyHighest}`).toLowerCase();
                 const matchesSearch = searchString.includes(searchTerm);
                 
                 let matchesRole = role === 'all' || item.role === role;
                 if (role === 'Executivo') matchesRole = ['Presidente', 'Vice-Presidente'].includes(item.role);
                 if (role === 'Judiciário') matchesRole = ['Ministro STF', 'Ministra STF', 'Desembargador', 'Juiz Federal', 'Juíza Federal'].includes(item.role);
                 
-                return matchesSearch && matchesRole;
+                const matchesState = state === 'all' || item.state === state;
+                const matchesParty = party === 'all' || item.party === party;
+                
+                return matchesSearch && matchesRole && matchesState && matchesParty;
             });
 
             renderTable(filteredData);
@@ -497,11 +670,25 @@
             updateCharts(filteredData);
         }
 
+        // --- Impostômetro Logic ---
+        function initImpostometro() {
+            const impostometroEl = document.getElementById('impostometro');
+            let currentValue = 2450000000000.00; // Valor fictício base anual (Trilhões)
+            
+            setInterval(() => {
+                currentValue += 75123.45 + (Math.random() * 5000);
+                impostometroEl.innerText = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(currentValue);
+            }, 100);
+        }
+
         document.getElementById('searchInput').addEventListener('input', filterData);
         document.getElementById('roleFilter').addEventListener('change', filterData);
+        document.getElementById('stateFilter').addEventListener('change', filterData);
+        document.getElementById('partyFilter').addEventListener('change', filterData);
 
         window.onload = () => {
             initSunburst();
+            initImpostometro();
             renderTable(mockData);
             updateDashboard(mockData);
             updateCharts(mockData);
