@@ -49,7 +49,7 @@
     <main class="flex-1 flex flex-col h-full overflow-y-auto w-full scroll-smooth">
         
         <!-- Header -->
-        <header class="glass-panel sticky top-0 z-10 border-b border-gray-200 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-sm gap-4">
+        <header class="glass-panel z-40 border-b border-gray-200 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center shadow-sm gap-4">
             <div class="flex flex-col w-full max-w-3xl">
                 <div class="flex items-center gap-4 w-full">
                     <button class="md:hidden text-gray-600 hover:text-gray-900"><i class="fa-solid fa-bars text-xl"></i></button>
@@ -59,14 +59,14 @@
                     </div>
                 </div>
                 <!-- Filtros rápidos estilo Politicômetro -->
-                <div class="mt-3 flex flex-wrap items-center gap-2 text-xs md:ml-10">
-                    <span class="text-gray-500 font-medium mr-1">O que ver no mapa:</span>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Quem governa</button>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Contas</button>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Escolas</button>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Obras</button>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium text-green-700"><i class="fa-solid fa-sack-dollar mr-1"></i>Dinheiro que chegou</button>
-                    <button class="bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full text-gray-700 transition font-medium">Votações</button>
+                <div class="mt-4 flex flex-wrap items-center gap-2 md:gap-3 text-sm md:ml-12 mb-1">
+                    <span class="text-gray-600 font-medium mr-1">O que ver no mapa:</span>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-gray-700 transition font-medium">Quem governa</button>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-gray-700 transition font-medium">Contas</button>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-gray-700 transition font-medium">Escolas</button>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-gray-700 transition font-medium">Obras</button>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-green-700 transition font-medium">Dinheiro que chegou</button>
+                    <button class="bg-[#f8f9fa] hover:bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full text-gray-700 transition font-medium">Votações</button>
                 </div>
             </div>
             <div class="hidden sm:flex items-center gap-4 mt-2 sm:mt-0">
@@ -77,6 +77,24 @@
 
         <!-- Content Area -->
         <div class="p-4 md:p-6 space-y-6">
+
+            <!-- IMPOSTÔMETRO (Inspirado no Politicômetro) Movido para o Topo -->
+            <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-lg border border-gray-700 p-5 md:p-6 flex flex-col md:flex-row items-center justify-between overflow-hidden relative">
+                <div class="absolute -right-10 -top-10 opacity-10">
+                    <i class="fa-solid fa-coins text-9xl text-yellow-400"></i>
+                </div>
+                <div class="relative z-10 mb-4 md:mb-0">
+                    <h3 class="text-gray-300 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-stopwatch text-yellow-400 text-lg animate-pulse"></i> Impostômetro Nacional
+                    </h3>
+                    <p class="text-gray-400 text-xs mt-1 max-w-md">Arrecadação de tributos em tempo real (estimativa anual). Compare o quanto você paga com o quanto custa a máquina pública.</p>
+                </div>
+                <div class="relative z-10 text-right">
+                    <div id="impostometro" class="text-3xl md:text-5xl font-black text-yellow-400 tracking-tighter" style="font-variant-numeric: tabular-nums;">
+                        R$ 2.450.000.000,00
+                    </div>
+                </div>
+            </div>
 
             <!-- ENGENHARIA REVERSA (PLANTA RADIAL) -->
             <section id="radial-section" class="radial-container rounded-2xl shadow-xl border border-gray-800 p-4 md:p-6 overflow-hidden relative">
@@ -100,62 +118,199 @@
                 <div class="text-center text-xs text-gray-500 mt-2">Dica: Clique no centro de qualquer círculo para voltar o zoom.</div>
             </section>
             
-            <!-- IMPOSTÔMETRO (Inspirado no Politicômetro) -->
-            <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-lg border border-gray-700 p-5 md:p-6 mt-6 flex flex-col md:flex-row items-center justify-between overflow-hidden relative">
-                <div class="absolute -right-10 -top-10 opacity-10">
-                    <i class="fa-solid fa-coins text-9xl text-yellow-400"></i>
+            <!-- SEÇÃO: QUEM SÃO OS SEUS REPRESENTANTES (Idêntico ao Politicômetro) -->
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 md:p-8 mt-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight max-w-lg">Quem são os seus representantes?</h2>
+                    <button class="bg-gray-100 text-gray-600 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-200 transition"><i class="fa-solid fa-volume-high"></i></button>
                 </div>
-                <div class="relative z-10 mb-4 md:mb-0">
-                    <h3 class="text-gray-300 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-stopwatch text-yellow-400 text-lg animate-pulse"></i> Impostômetro Nacional
-                    </h3>
-                    <p class="text-gray-400 text-xs mt-1 max-w-md">Arrecadação de tributos em tempo real (estimativa anual). Compare o quanto você paga com o quanto custa a máquina pública.</p>
+                <p class="text-gray-600 text-lg mb-6">Digite a sua cidade ou o seu estado e veja todo mundo que está no cargo por você hoje.</p>
+                
+                <div class="relative mb-6">
+                    <i class="fa-solid fa-location-dot absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+                    <input type="text" placeholder="Digite sua cidade ou estado" class="w-full pl-12 pr-4 py-4 bg-white border-2 border-gray-200 rounded-full focus:outline-none focus:border-gray-900 text-lg transition shadow-sm">
                 </div>
-                <div class="relative z-10 text-right">
-                    <div id="impostometro" class="text-3xl md:text-5xl font-black text-yellow-400 tracking-tighter" style="font-variant-numeric: tabular-nums;">
-                        R$ 2.450.000.000,00
+                
+                <p class="text-sm text-gray-500 mb-3">Exemplos:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                    <button class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-left">
+                        <i class="fa-solid fa-map text-purple-700 text-2xl"></i>
+                        <div>
+                            <div class="font-bold text-gray-900">Rio de Janeiro</div>
+                            <div class="text-[10px] text-gray-500">cidade • RJ</div>
+                        </div>
+                    </button>
+                    <button class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-left">
+                        <i class="fa-solid fa-map text-purple-700 text-2xl"></i>
+                        <div>
+                            <div class="font-bold text-gray-900">São Paulo</div>
+                            <div class="text-[10px] text-gray-500">estado inteiro</div>
+                        </div>
+                    </button>
+                    <button class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-left">
+                        <i class="fa-solid fa-map text-yellow-700 text-2xl"></i>
+                        <div>
+                            <div class="font-bold text-gray-900">Salvador</div>
+                            <div class="text-[10px] text-gray-500">cidade • BA</div>
+                        </div>
+                    </button>
+                    <button class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-left">
+                        <i class="fa-solid fa-map text-purple-700 text-2xl"></i>
+                        <div>
+                            <div class="font-bold text-gray-900">Minas Gerais</div>
+                            <div class="text-[10px] text-gray-500">estado inteiro</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="text-sm text-gray-500 mb-4">Exemplo: quem representa quem mora no <a href="#" class="text-blue-600 underline">Rio de Janeiro</a></div>
+                
+                <div class="space-y-4">
+                    <!-- Na sua cidade -->
+                    <div class="border-2 border-gray-900 rounded-2xl p-5 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-gray-900"></div>
+                        <h4 class="font-black text-xl text-gray-900 mb-4">Na sua cidade</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-gray-900">Prefeito e vice</div>
+                                    <div class="text-sm text-gray-500 mt-1 max-w-[250px]">cuidam da cidade: posto de saúde, escola, transporte, limpeza</div>
+                                </div>
+                                <div class="flex -space-x-2">
+                                    <div class="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-500"></i></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                                <div>
+                                    <div class="font-bold text-gray-900">Vereadores (9 a 55)</div>
+                                    <div class="text-sm text-gray-500 mt-1 max-w-[250px]">fazem as leis da cidade e fiscalizam a prefeitura</div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-400"></i></div>
+                                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-500"></i></div>
+                                        <div class="w-8 h-8 rounded-full bg-gray-400 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-600"></i></div>
+                                    </div>
+                                    <span class="text-xs font-bold text-gray-500">+48</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- No seu estado -->
+                    <div class="border border-gray-200 rounded-2xl p-5 relative overflow-hidden bg-gray-50">
+                        <h4 class="font-black text-xl text-gray-900 mb-4">No seu estado</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-gray-900">Governador e vice</div>
+                                    <div class="text-sm text-gray-500 mt-1 max-w-[250px]">cuidam do estado: polícia, hospitais e escolas estaduais, estradas</div>
+                                </div>
+                                <div class="flex -space-x-2">
+                                    <div class="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-500"></i></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-200">
+                                <div>
+                                    <div class="font-bold text-gray-900">Deputados estaduais (24 a 94)</div>
+                                    <div class="text-sm text-gray-500 mt-1 max-w-[250px]">fazem as leis do estado e fiscalizam o governo</div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-400"></i></div>
+                                        <div class="w-8 h-8 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-500"></i></div>
+                                    </div>
+                                    <span class="text-xs font-bold text-gray-500">+61</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Em Brasília -->
+                    <div class="border border-gray-200 rounded-2xl p-5 relative overflow-hidden bg-gray-50">
+                        <h4 class="font-black text-xl text-gray-900 mb-4">Em Brasília</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-bold text-gray-900">3 senadores</div>
+                                    <div class="text-sm text-gray-500 mt-1 max-w-[250px]">representam o estado no Senado e votam as leis do país</div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-500"></i></div>
+                                        <div class="w-10 h-10 rounded-full bg-gray-400 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-gray-600"></i></div>
+                                        <div class="w-10 h-10 rounded-full bg-gray-500 border-2 border-white flex items-center justify-center overflow-hidden"><i class="fa-solid fa-user text-white"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Painel de Dados Oficiais (Visão Geral - Politicômetro) -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mt-6">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-gray-900">Raio-X do Brasil: 70.816 políticos eleitos</h3>
-                        <p class="text-sm text-gray-500">Da Câmara Municipal a Brasília no cargo hoje.</p>
+            <!-- SEÇÃO CONGRESSO (Gráfico Hemiciclo) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 md:p-8">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-900 text-white px-5 py-2.5 rounded-full font-bold text-sm">Câmara • 513</button>
+                        <button class="bg-white text-gray-700 border border-gray-300 px-5 py-2.5 rounded-full font-bold text-sm hover:bg-gray-50">Senado • 81</button>
                     </div>
-                    <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mt-2 md:mt-0 border border-blue-200">Fonte: TSE</span>
+                    <div class="flex gap-2 mb-2">
+                        <button class="bg-gray-900 text-white px-4 py-1 rounded-full font-bold text-xs">Hoje</button>
+                        <button class="bg-white text-gray-500 px-4 py-1 rounded-full font-bold text-xs hover:bg-gray-50 border border-transparent">A partir de fev/2027</button>
+                    </div>
+                    
+                    <!-- Gráfico Hemiciclo (ECharts) -->
+                    <div class="relative w-full h-[250px] mt-4">
+                        <div id="parliamentChart" class="w-full h-full"></div>
+                    </div>
+
+                    <!-- Legendas de Partidos -->
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-3 mt-4 text-sm">
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-900"></div><span class="font-bold text-gray-700">PL</span></div> <span class="text-gray-500">98</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-red-600"></div><span class="font-bold text-gray-700">PT</span></div> <span class="text-gray-500">66</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-teal-500"></div><span class="font-bold text-gray-700">UNIÃO</span></div> <span class="text-gray-500">50</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-yellow-500"></div><span class="font-bold text-gray-700">PSD</span></div> <span class="text-gray-500">48</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-500"></div><span class="font-bold text-gray-700">PP</span></div> <span class="text-gray-500">47</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-400"></div><span class="font-bold text-gray-700">REPUB...</span></div> <span class="text-gray-500">43</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-green-600"></div><span class="font-bold text-gray-700">MDB</span></div> <span class="text-gray-500">38</span></div>
+                        <div class="flex justify-between items-center"><div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-green-400"></div><span class="font-bold text-gray-700">PODE</span></div> <span class="text-gray-500">27</span></div>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 text-center">
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">2</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Presidência e vice</div>
+
+                <!-- Painel de Dados Oficiais (Visão Geral - Politicômetro) -->
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 md:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-2xl font-black text-gray-900 tracking-tight">Raio-X do Brasil</h3>
+                                <p class="text-sm text-gray-500 mt-1">Da Câmara Municipal a Brasília no cargo hoje.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 text-left">
+                            <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                                <div class="text-[12px] uppercase text-gray-500 font-bold leading-tight">Presidência e vice</div>
+                                <div class="text-2xl font-black text-gray-900 leading-none">2</div>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                                <div class="text-[12px] uppercase text-gray-500 font-bold leading-tight">Senadores</div>
+                                <div class="text-2xl font-black text-gray-900 leading-none">81</div>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                                <div class="text-[12px] uppercase text-gray-500 font-bold leading-tight">Deputados Federais</div>
+                                <div class="text-2xl font-black text-gray-900 leading-none">513</div>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                                <div class="text-[12px] uppercase text-gray-500 font-bold leading-tight">Governadores e vices</div>
+                                <div class="text-2xl font-black text-gray-900 leading-none">40</div>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-gray-100 pb-2">
+                                <div class="text-[12px] uppercase text-gray-500 font-bold leading-tight">Deputados Estaduais</div>
+                                <div class="text-2xl font-black text-gray-900 leading-none">1.018</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">81</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Senadores</div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">513</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Deputados Federais</div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">40</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Governadores e vices</div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">1.018</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Deputados Estaduais</div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">11.029</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Prefeitos e vices</div>
-                    </div>
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 shadow-sm">
-                        <div class="text-lg font-black text-gray-800">58.133</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold mt-1 leading-tight">Vereadores</div>
-                    </div>
+                    <div class="mt-4"><span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-1 rounded">Fonte: TSE</span></div>
                 </div>
             </div>
 
@@ -322,7 +477,7 @@
                 </div>
             </div>
 
-            <!-- Footer Politicômetro Style -->
+            <!-- Footer Politicômetro Style (CORRIGIDO) -->
             <footer class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8 text-xs text-gray-500 space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     <div>
@@ -332,9 +487,6 @@
                             <li><a href="#" class="hover:text-blue-600 transition">Quem é quem</a></li>
                             <li><a href="#" class="hover:text-blue-600 transition">Impostômetro</a></li>
                             <li><a href="#" class="hover:text-blue-600 transition">Congresso</a></li>
-                            <li><a href="#" class="hover:text-blue-600 transition">Quem me representa</a></li>
-                            <li><a href="#" class="hover:text-blue-600 transition">Governos</a></li>
-                            <li><a href="#" class="hover:text-blue-600 transition">Eleições</a></li>
                         </ul>
                     </div>
                     <div>
@@ -342,26 +494,45 @@
                         <ul class="space-y-2">
                             <li><a href="#" class="hover:text-blue-600 transition">O que é a plataforma</a></li>
                             <li><a href="#" class="hover:text-blue-600 transition">Metodologia e fontes</a></li>
-                            <li><a href="#" class="hover:text-blue-600 transition">Como atualizamos</a></li>
                             <li><a href="#" class="hover:text-blue-600 transition">Privacidade</a></li>
                         </ul>
                     </div>
-                    <div class="md:col-span-2 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                        <h4 class="font-bold text-gray-700 mb-2 text-sm uppercase"><i class="fa-regular fa-envelope mr-1 text-gray-400"></i> Receba as novidades</h4>
-                        <p class="mb-3 text-gray-500">Um e-mail quando entram dados novos. Sem propaganda.</p>
-                        <div class="flex flex-col sm:flex-row gap-2">
-                            <input type="email" placeholder="Seu melhor e-mail" class="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-2/3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <button class="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 transition font-medium sm:w-1/3">Quero receber</button>
-                        </div>
-                        <p class="mt-2 text-[10px] text-gray-400">O e-mail serve só para isso. Consulte a Privacidade.</p>
-                    </div>
                 </div>
-                <div class="pt-6 border-t border-gray-100 text-[10px] leading-relaxed text-gray-400">
+                <div class="pt-6 border-t border-gray-100 text-[10px] leading-relaxed text-gray-400 pb-20 md:pb-6">
                     © 2026 Transparência Política BR · inspirado por iniciativas de utilidade pública, sem fins comerciais. Código e design interativo desenvolvidos para demonstração. Dados da Câmara, do Senado, do TSE, do IBGE, da Receita Federal, do STF e das Assembleias e Câmaras Municipais que publicam dados abertos, citados nas respectivas seções.
                 </div>
             </footer>
         </div>
     </main>
+
+    <!-- NAVEGAÇÃO MOBILE INFERIOR (Estilo Politicômetro) -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-[#111827] text-gray-400 flex justify-around items-end pt-2 pb-4 px-2 border-t border-gray-800 z-50 rounded-t-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <a href="#" class="flex flex-col items-center p-2 hover:text-white transition">
+            <i class="fa-solid fa-map-location-dot text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Mapa</span>
+        </a>
+        <a href="#" class="flex flex-col items-center p-2 hover:text-white transition">
+            <i class="fa-solid fa-users text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Quem é quem</span>
+        </a>
+        
+        <!-- Botão Explorar Circular -->
+        <a href="#" class="flex flex-col items-center relative text-white px-2">
+            <div class="absolute bottom-6 bg-white text-gray-900 rounded-full w-14 h-14 flex items-center justify-center border-4 border-[#111827] shadow-lg">
+                <i class="fa-solid fa-plus text-2xl"></i>
+            </div>
+            <span class="text-[10px] mt-6 font-bold">Explorar</span>
+        </a>
+        
+        <a href="#" class="flex flex-col items-center p-2 hover:text-white transition">
+            <i class="fa-solid fa-location-dot text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium text-center leading-tight w-16">Me representa</span>
+        </a>
+        <a href="#" class="flex flex-col items-center p-2 hover:text-white transition">
+            <i class="fa-solid fa-landmark-dome text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Congresso</span>
+        </a>
+    </nav>
 
     <script>
         const formatCurrency = (value) => {
@@ -457,6 +628,43 @@
                     label: { rotate: 'radial', color: '#fff', textBorderColor: '#000', textBorderWidth: 1, fontSize: 11 },
                     itemStyle: { borderRadius: 4, borderWidth: 2, borderColor: '#111827' }
                 }
+            };
+            myChart.setOption(option);
+            window.addEventListener('resize', () => myChart.resize());
+        }
+
+        // --- Gráfico de Hemiciclo (Congresso) ---
+        function initParliamentChart() {
+            const chartDom = document.getElementById('parliamentChart');
+            const myChart = echarts.init(chartDom);
+            
+            // Simulando um gráfico de hemiciclo com pie chart (startAngle 180, endAngle 0)
+            const option = {
+                tooltip: { trigger: 'item', formatter: '{b}: {c} cadeiras' },
+                series: [
+                    {
+                        name: 'Câmara',
+                        type: 'pie',
+                        radius: ['40%', '100%'],
+                        center: ['50%', '90%'],
+                        startAngle: 180,
+                        endAngle: 0,
+                        padAngle: 2,
+                        itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+                        label: { show: false },
+                        data: [
+                            { value: 98, name: 'PL', itemStyle: { color: '#1e3a8a' } },
+                            { value: 66, name: 'PT', itemStyle: { color: '#dc2626' } },
+                            { value: 50, name: 'UNIÃO', itemStyle: { color: '#14b8a6' } },
+                            { value: 48, name: 'PSD', itemStyle: { color: '#eab308' } },
+                            { value: 47, name: 'PP', itemStyle: { color: '#3b82f6' } },
+                            { value: 43, name: 'REPUBLICANOS', itemStyle: { color: '#60a5fa' } },
+                            { value: 38, name: 'MDB', itemStyle: { color: '#16a34a' } },
+                            { value: 27, name: 'PODE', itemStyle: { color: '#4ade80' } },
+                            { value: 96, name: 'Outros', itemStyle: { color: '#cbd5e1' } }
+                        ]
+                    }
+                ]
             };
             myChart.setOption(option);
             window.addEventListener('resize', () => myChart.resize());
@@ -688,6 +896,7 @@
 
         window.onload = () => {
             initSunburst();
+            initParliamentChart();
             initImpostometro();
             renderTable(mockData);
             updateDashboard(mockData);
